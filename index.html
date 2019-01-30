@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <h5 id="name"></h5>
+    <h5 id="org"></h5>
+    <h5 id="gender"></h5>
+    <h5 id="n_conditions"></h5>
+    <h5 id="conditions"></h5>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+
+        $.ajax({
+        url: "https://stephanieli333.github.io/patient.json",
+
+        dataType: "json",
+        type: 'GET',
+        crossDomain: true,
+        success: function( data ) {
+
+          document.getElementById("name").innerHTML = "Name of patient: " + data.name.given + " " + data.name.family;
+          document.getElementById("org").innerHTML = "Organization: " +data.managingOrganization.display;
+          document.getElementById("gender").innerHTML = "Gender: " +data.gender;
+          document.getElementById("n_conditions").innerHTML = "Number of conditions: " + data.conditions.length;
+
+          var text = "Conditions: " + "</br>";
+          var i;
+          for (i = 0; i < data.conditions.length; i++) { 
+            text += "- "+data.conditions[i] + " " +"</br>";
+          }
+
+          document.getElementById("conditions").innerHTML = text;
+               
+        }
+
+    });
+    </script>
+  </body>
+</html>
